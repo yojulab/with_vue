@@ -2,9 +2,7 @@ import axios from "axios";
 
 const weatherMixin = {
   data() {
-    return {
-      weather: null,
-    };
+    return {};
   },
   methods: {
     async getWeather(city) {
@@ -19,7 +17,7 @@ const weatherMixin = {
           lon: coord.lon,
           lat: coord.lat,
         },
-        temperature: main.temp,
+        temperature: this.temperatureToCelsius(main.temp),
         wind: wind.speed,
         humidity: main.humidity,
         icon: `https://openweathermap.org/img/wn/${weather[0].icon}.png`,
