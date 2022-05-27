@@ -1,10 +1,11 @@
 ### with_vue
 ### run app 
-npm run serve
-npm run build
-npm install bootstrap
-npm install axios --save
-
+$ npm run serve
+$ npm run build
+$ npm install bootstrap
+$ npm install axios --save
+$ npm install element-plus --save
+$ npm install @element-plus/icons-vue
 ### toy project
 |주제|주요항목|작성|dataset|참조|
 |---|---|---|---|---|
