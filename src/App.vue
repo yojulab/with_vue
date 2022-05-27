@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import WeatherApp from "./components/weather/WeatherApp.vue";
+import WeatherApp from "./components/weatherapp/WeatherApp.vue";
 
 export default {
   name: "App",
