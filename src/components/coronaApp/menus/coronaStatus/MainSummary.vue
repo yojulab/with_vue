@@ -1,5 +1,5 @@
 <template>
-  <h3>MainContents</h3>
+  <h3>Main Summary</h3>
 </template>
 
 <script>

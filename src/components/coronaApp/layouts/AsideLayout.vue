@@ -19,6 +19,7 @@
             :index="child.index"
             v-for="(child, idx) in menu.children"
             :key="idx"
+            @click="selectedMenu(child)"
             >{{ child.title }}</el-menu-item
           >
         </el-sub-menu>
@@ -41,7 +42,7 @@ export default {
     },
   },
 
-  setup() {
+  setup(props, context) {
     const state = reactive({
       menuItems: [
         {
@@ -52,12 +53,12 @@ export default {
             {
               title: "국가별 현황",
               index: "1-1",
-              component: "item one",
+              path: "menus/coronaStatus/InternationalSummary",
             },
             {
               title: "국내 현황",
               index: "1-2",
-              component: "item one",
+              path: "menus/coronaStatus/DomesticSummary",
             },
           ],
         },
@@ -80,8 +81,13 @@ export default {
         },
       ],
     });
+    const selectedMenu = (menu) => {
+      console.log("selectedMenu : menu ", menu);
+      context.emit("selectedMenu", menu);
+    };
     return {
       ...toRefs(state),
+      selectedMenu,
     };
   },
 };
