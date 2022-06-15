@@ -1,5 +1,5 @@
 <template>
-  <canvas id="myChart" width="400" height="400" ref="myChart"></canvas>
+  <canvas id="myChart" width="400" height="400" ref="refChart"></canvas>
 </template>
 
 <script>
@@ -52,7 +52,7 @@ export default {
   methods: {
     drawChart() {
       const { type, labels, datasets, options } = this.chartOptions;
-      const ctx = document.getElementById("myChart").getContext("2d");
+      const ctx = this.$refs.refChart.getContext("2d");
       // eslint-disable-next-line no-unused-vars
       this.ownChart = new Chart(ctx, {
         type: type,
