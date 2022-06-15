@@ -7,6 +7,7 @@ $ npm install axios --save
 $ npm install element-plus --save
 $ npm install @element-plus/icons-vue
 ### toy project
+publishing web with github : vue.config.js
 |주제|주요항목|작성|dataset|참조|
 |---|---|---|---|---|
 |도시 날씨|axios, api|[vue](./src/components/weatherApp/WeatherApp.vue)|[openweather API](https://openweathermap.org/api/one-call-3)||
