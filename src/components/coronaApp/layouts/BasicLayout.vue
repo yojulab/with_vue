@@ -34,7 +34,7 @@ export default {
     // console.log("CoronaApp : type ", type.value);
 
     const isCollapse = computed(() => type.value === "sm");
-    console.log("return CoronaApp : isCollapse ", isCollapse.value);
+    // console.log("return CoronaApp : isCollapse ", isCollapse.value);
     return {
       isCollapse,
     };

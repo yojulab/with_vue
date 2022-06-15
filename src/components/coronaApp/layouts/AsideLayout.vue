@@ -82,7 +82,7 @@ export default {
       ],
     });
     const selectedMenu = (menu) => {
-      console.log("selectedMenu : menu ", menu);
+      // console.log("selectedMenu : menu ", menu);
       context.emit("selectedMenu", menu);
     };
     return {

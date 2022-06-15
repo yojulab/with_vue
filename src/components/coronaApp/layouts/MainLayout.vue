@@ -26,7 +26,7 @@ export default {
   watch: {
     content: {
       handler: function (val) {
-        console.log(val);
+        // console.log(val);
         this.componentId = markRaw(
           defineAsyncComponent(() =>
             import(`@/components/coronaApp/${val.path}`)

@@ -20,6 +20,6 @@ export default function useBreakpoint() {
     // console.log("sizeType : ", type);
     return type;
   });
-  console.log("return use_breakpoint : ", sizeType.value);
+  // console.log("return use_breakpoint : ", sizeType.value);
   return sizeType;
 }
