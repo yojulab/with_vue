@@ -1,5 +1,5 @@
 <template>
-  <h3>Domestic Summary</h3>
+  <h3>Chartjs Example</h3>
   <canvas id="myChart" width="400" height="400"></canvas>
 </template>
 

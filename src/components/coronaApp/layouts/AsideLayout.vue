@@ -58,7 +58,7 @@ export default {
             {
               title: "Chartjs Example",
               index: "1-3",
-              path: "menus/coronaStatus/DomesticChartjs",
+              path: "menus/coronaStatus/charts/ChartjsExample",
             },
             {
               title: "국내 현황",
