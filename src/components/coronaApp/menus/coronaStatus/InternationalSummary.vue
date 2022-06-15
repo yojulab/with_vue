@@ -8,9 +8,10 @@
         >{{ displayedType.label }}</el-radio-button
       >
     </el-radio-group>
+    <input type="text" name="" id="" v-model="searchword" />
   </div>
   <ul>
-    <li v-for="(country, idx) in coronaSummaryCountries" :key="idx">
+    <li v-for="(country, idx) in sortedCountries" :key="idx">
       <!-- <img src="https://placeimg.com/10/10/any" alt="" /> -->
       <img
         :src="require(`@/assets/flags/3x2/${country.CountryCode}.svg`)"
@@ -41,28 +42,29 @@ export default {
   },
   data() {
     return {
+      searchword: "",
       coronaSummaryCountries: [],
       selectedType: 0,
       displayedTypes: [
         {
           name: "NewConfirmed",
           label: "New Confirmed",
-          sortedlist: -1,
+          sorted: -1,
         },
         {
           name: "TotalConfirmed",
           label: "Total Confirmed",
-          sortedlist: 1,
+          sorted: 1,
         },
         {
           name: "NewDeaths",
           label: "New Deaths",
-          sortedlist: -1,
+          sorted: -1,
         },
         {
           name: "TotalDeaths",
           label: "Total Deaths",
-          sortedlist: 1,
+          sorted: 1,
         },
       ],
     };
@@ -70,11 +72,21 @@ export default {
   computed: {
     sortedCountries() {
       console.log(this.displayedTypes[this.selectedType]);
-      const { name, sortedlist } = this.displayedTypes[this.selectedType];
+      const { name, sorted } = this.displayedTypes[this.selectedType];
       let list = [...this.coronaSummaryCountries];
+
+      // filter by searchword
+      if (this.searchword) {
+        list = list.filter((countries) => {
+          return countries.Country.toLowerCase().includes(this.searchword);
+        });
+      }
+      // sort by name
       list.sort((a, b) => {
-        return a[name] > b[name] ? sortedlist : -sortedlist;
+        return a[name] > b[name] ? sorted : -sorted;
       });
+
+      console.log(`countries : ${list.length}`);
       return list;
     },
   },
