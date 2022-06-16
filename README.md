@@ -6,6 +6,8 @@ $ npm install bootstrap
 $ npm install axios --save
 $ npm install element-plus --save
 $ npm install @element-plus/icons-vue
+$ npm install moment --save
+
 ### toy project
 publishing web with github : vue.config.js
 |주제|주요항목|작성|dataset|참조|
