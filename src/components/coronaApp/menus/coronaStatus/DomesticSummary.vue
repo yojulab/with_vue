@@ -3,7 +3,7 @@
   <ul class="graph-grid">
     <li>
       <h3>corona Status</h3>
-      <ChartGraph />
+      <ChartGraph :chartOptions="filteredSummaryData" />
     </li>
   </ul>
 </template>
@@ -23,6 +23,44 @@ export default {
       toMonth: 3,
       summaryData: [],
     };
+  },
+  computed: {
+    filteredSummaryData() {
+      return {
+        type: "line",
+        labels: this.summaryData.map((item) => {
+          console.log(item[0]);
+          return Moment(item[0].Date).format("YYYY-MM-DD");
+        }),
+        datasets: [
+          {
+            label: "Confirmed",
+            data: this.summaryData,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+          {
+            label: "Deaths",
+            data: this.summaryData.map((item) => {
+              return item.Deaths;
+            }),
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+          {
+            label: "Recovered",
+            data: this.summaryData.map((item) => {
+              return item.Recovered;
+            }),
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+    },
   },
   mounted() {
     this.getSummaryData(); // get summary data
@@ -58,10 +96,11 @@ export default {
           // }
           return today === fromday;
         });
+        console.log(`filtered : ${filtered[0]}`);
         filteredData.push(filtered);
         loop_count++;
       }
-      // console.log(filteredData);
+      console.log(filteredData);
     },
   },
 };
