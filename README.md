@@ -13,6 +13,7 @@ publishing web with github : vue.config.js
 ```
 $ npm run build
 ```
+https://sanghunoh.github.io/with_vue/
 |주제|주요항목|작성|dataset|참조|
 |---|---|---|---|---|
 |도시 날씨|axios, api|[vue](./src/components/weatherApp/WeatherApp.vue)|[openweather API](https://openweathermap.org/api/one-call-3)||
