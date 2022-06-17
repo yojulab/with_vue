@@ -3,7 +3,15 @@
   <ul class="graph-grid">
     <li>
       <h3>corona Status</h3>
-      <ChartGraph :chartOptions="filteredSummaryData" />
+      <ChartGraph :chartOptions="filteredSummary" :key="watchKey0" />
+    </li>
+    <li>
+      <h3>Confirmed VS Deaths</h3>
+      <ChartGraph :chartOptions="comparedSummary" :key="watchKey1" />
+    </li>
+    <li>
+      <h3>Deaths VS Recoverd</h3>
+      <ChartGraph :chartOptions="recoverdSummary" :key="watchKey2" />
     </li>
   </ul>
 </template>
@@ -19,23 +27,24 @@ export default {
   },
   data() {
     return {
-      caseKey: 0,
+      watchKey0: 0,
+      watchKey1: 0,
       toMonth: 3,
       summaryData: [],
     };
   },
   computed: {
-    filteredSummaryData() {
+    filteredSummary() {
       return {
         type: "line",
         labels: this.summaryData.map((item) => {
-          console.log(item[0]);
-          return Moment(item[0].Date).format("YYYY-MM-DD");
+          // console.log(item);
+          return Moment(item.Date).format("YYYY-MM-DD");
         }),
         datasets: [
           {
             label: "Confirmed",
-            data: this.summaryData,
+            data: this.summaryData.map((item) => item.Confirmed),
             backgroundColor: "rgba(255, 99, 132, 0.2)",
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
@@ -45,8 +54,8 @@ export default {
             data: this.summaryData.map((item) => {
               return item.Deaths;
             }),
-            backgroundColor: "rgba(255, 99, 132, 0.2)",
-            borderColor: "rgba(255, 99, 132, 1)",
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1,
           },
           {
@@ -54,12 +63,58 @@ export default {
             data: this.summaryData.map((item) => {
               return item.Recovered;
             }),
-            backgroundColor: "rgba(255, 99, 132, 0.2)",
-            borderColor: "rgba(255, 99, 132, 1)",
+            backgroundColor: "rgba(255, 206, 86, 0.2)",
+            borderColor: "rgba(255, 206, 86, 1)",
             borderWidth: 1,
           },
         ],
       };
+    },
+    recoverdSummary() {
+      const lastMonth = this.summaryData[this.summaryData.length - 1] || {};
+      const lastMonthRecovered = lastMonth.Recovered || 0;
+      const lastMonthDeaths = lastMonth.Deaths || 0;
+      const data = [lastMonthRecovered, lastMonthDeaths];
+      return {
+        type: "doughnut",
+        labels: ["Recovered", "Deaths"],
+        datasets: [
+          {
+            label: "Recovered",
+            data: data,
+            backgroundColor: ["#FF6384", "#36A2EB"],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB"],
+          },
+        ],
+      };
+    },
+    comparedSummary() {
+      const lastMonth = this.summaryData[this.summaryData.length - 1] || {};
+      const lastMonthConfirmed = lastMonth.Confirmed || 0;
+      const lastMonthDeaths = lastMonth.Deaths || 0;
+      const data = [lastMonthConfirmed, lastMonthDeaths];
+      return {
+        type: "doughnut",
+        labels: ["Confirmed", "Deaths"],
+        datasets: [
+          {
+            label: "Confirmed",
+            data: data,
+            backgroundColor: ["#FF6384", "#36A2EB"],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB"],
+          },
+        ],
+      };
+    },
+  },
+  watch: {
+    summaryData: {
+      handler() {
+        this.watchKey0++;
+        this.watchKey1++;
+        this.watchKey2++;
+      },
+      deep: true,
     },
   },
   mounted() {
@@ -71,7 +126,7 @@ export default {
       const fromDay = Moment()
         .subtract(this.toMonth, "months")
         .format("YYYY-MM-DD"); // get date from 3 months ago
-      console.log(`from ${fromDay} to ${toDay}`);
+      // console.log(`from ${fromDay} to ${toDay}`);
       const params = {
         from: fromDay,
         to: toDay,
@@ -84,23 +139,18 @@ export default {
     },
     filterSummarayData(data) {
       const filteredData = [];
-      let loop_count = 0;
-      while (loop_count <= this.toMonth) {
-        const filtered = data.filter((item) => {
-          let today = Moment(item.Date).format("YYYY-MM-DD");
-          let fromday = Moment()
-            .subtract(loop_count, "months")
-            .format("YYYY-MM-DD");
-          // if (today === fromday) {
-          //   console.log(`today, fromday : ${today}, ${fromday}`);
-          // }
-          return today === fromday;
-        });
-        console.log(`filtered : ${filtered[0]}`);
-        filteredData.push(filtered);
-        loop_count++;
-      }
+
+      const baseDay = Moment().format("DD");
+      // console.log(`baseDay : ${baseDay}`);
+      data.forEach((item) => {
+        let compareDay = Moment(item.Date).format("DD");
+        if (baseDay === compareDay) {
+          // console.log(`baseDay, compareDay : ${baseDay}, ${compareDay}`);
+          filteredData.push(item);
+        }
+      });
       console.log(filteredData);
+      return filteredData;
     },
   },
 };
