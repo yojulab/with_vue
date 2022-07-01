@@ -16,7 +16,7 @@ $ npm run build
 https://sanghunoh.github.io/with_vue/
 |주제|주요항목|작성|dataset|참조|
 |---|---|---|---|---|
-|Todo List|Components, props|[vue](./src/components/todoListApp/TodoListApp.vue)|---|---|
-|Todo List|props, event|[vue](./src/components)|---|---|
+|Todo List|Components, props|[vue](./src/components/todoListApp/TodoListApp.vue)|---|[img](https://placeimg.com/)|
+|Todo List|props, event|[vue](./src/components/todoListEventsApp/todoListEventsApp.vue)|---|---|
 |도시 날씨|axios, api|[vue](./src/components/weatherApp/WeatherApp.vue)|[openweather API](https://openweathermap.org/api/one-call-3)||
 |Corona Summary|axios, api|[vue](./src/components/coronaApp/CoronaApp.vue)|[corona19 API](https://documenter.getpostman.com/view/10808728/SzS8rjbc)|[element-plus](https://element-plus.org/),[flags git](https://github.com/purecatamphetamine/country-flag-icons)|
