@@ -10,7 +10,6 @@
           id="inputext"
           placeholder="Add a new task"
           @keypress.enter="keyEnter"
-          v-model="todoText"
         />
         <button id="add-button" @click="buttonClick">Add</button>
       </div>
@@ -35,9 +34,11 @@ export default {
   methods: {
     inputTextFocus() {
       const target = document.querySelector("#inputext");
-      // console.log(`inputTextFocus : ${target}`);
+      console.log(`inputTextFocus : ${target}`);
+      const todoText = target.value;
       target.value = "";
       target.focus();
+      return todoText;
     },
     keyEnter(event) {
       console.log(`keyEnter : ${event.target}`);
