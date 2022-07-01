@@ -9,19 +9,44 @@
         <button id="add-button">Add</button>
       </div>
       <div class="list-container">
-        <ul id="items">
-          <TodoItem></TodoItem>
-        </ul>
+        <TodoList :todolist="todolist" />
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import TodoItem from "./TodoItem.vue";
+import TodoList from "./TodoList.vue";
 export default {
   components: {
-    TodoItem,
+    TodoList,
+  },
+  data() {
+    return {
+      todolist: [
+        {
+          id: 2,
+          title: "quis ut nam facilis et officia qui",
+          favorite: "favorite_border",
+        },
+        {
+          id: 3,
+          title: "fugiat veniam minus",
+          favorite: "favorite",
+        },
+        {
+          id: 4,
+          title: "et porro tempora",
+          favorite: "favorite_border",
+        },
+        {
+          id: 5,
+          title:
+            "laboriosam mollitia et enim quasi adipisci quia provident illum",
+          favorite: "favorite",
+        },
+      ],
+    };
   },
 };
 </script>
@@ -73,30 +98,5 @@ header {
   cursor: pointer;
   background-color: rgb(157, 69, 167);
   color: #fff;
-}
-#items li {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1.5em;
-  background-color: #fff;
-  color: #000;
-  align-items: center;
-}
-.task {
-  flex: 9;
-}
-.manage {
-  flex: 1;
-}
-
-.like i {
-  color: goldenrod;
-}
-.delete i {
-  color: red;
-}
-.material-icons:hover {
-  cursor: pointer;
 }
 </style>
