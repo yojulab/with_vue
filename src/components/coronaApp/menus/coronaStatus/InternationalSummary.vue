@@ -13,10 +13,10 @@
   <ul>
     <li v-for="(country, idx) in sortedCountries" :key="idx">
       <!-- <img src="https://placeimg.com/10/10/any" alt="" /> -->
-      <img
+      <!-- <img
         :src="require(`@/assets/flags/3x2/${country.CountryCode}.svg`)"
         :alt="country.Country"
-      />
+      /> -->
       <span>{{ country.Country }}</span>
       <span>{{ country.NewConfirmed }}</span
       >/
@@ -93,4 +93,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+ul {
+  list-style-type: none;
+}
+/* ul > li {
+  display: flex;
+} */
+img {
+  transform: scale(0.1);
+}
+</style>
