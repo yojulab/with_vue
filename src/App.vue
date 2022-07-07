@@ -1,7 +1,16 @@
 <template>
-  <keep-alive>
-    <component :is="currentApp"></component>
-  </keep-alive>
+  <h2>Main App Vue</h2>
+  <button @click="currentMenu = 'TodoListApp_JS'">TodoListApp_JS</button>
+  <!-- <button @click="currentMenu = 'TodoList'">TodoList</button> -->
+  <!-- <button @click="currentMenu = 'TodoListEvents'">TodoListEvents</button> -->
+  <button @click="currentMenu = 'WeatherApp'">WeatherApp</button>
+  <button @click="currentMenu = 'CoronaApp'">CoronaApp</button>
+  <div>
+    currentMenu : {{ currentMenu }}
+    <keep-alive>
+      <component :is="currentMenu"></component>
+    </keep-alive>
+  </div>
 </template>
 
 <script>
@@ -15,7 +24,7 @@ export default {
   name: "App",
   data() {
     return {
-      currentApp: "TodoListApp_JS",
+      currentMenu: "",
     };
   },
   components: {
@@ -28,4 +37,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+button {
+  padding: 0.3rem;
+  margin: 0.3rem;
+}
+</style>
